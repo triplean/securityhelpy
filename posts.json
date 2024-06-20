@@ -1,0 +1,12 @@
+[
+  {
+      "title": "¡Bienvenido!",
+      "html": "<h1>¡Bienvenido a Security Helpy!</h1> <p>Aquí encontrarás diversos tutoriales para FNAF: Security Breach.</p> <img src='https://triplean.github.io/projects/SecurityHelpy/resources/logo_new.png' />",
+      "highlighted": true
+  },
+  {
+    "title": "Conseguir el pase de guarderia",
+    "html": "<h1> Cómo conseguir el pase de Guardería.</h1> <p>Cuando las puertas se cierran Freddy nos dice que consigamos un pase. Para lograr esto hay que tomar en cuenta dos edificios: Faz-Pad y la tienda de regalos. Una vez que tomes el pase de entrada tendrás que dirijirte a la tienda de regalos, pero como la entrada en el primer piso está cerrada tendrás que acceder a ésta desde el segundo piso. Una vez que entres esquiva al Staff-Bot y busca las escaleras hacia el primer piso. Abre el regalo que se encuentra en un anaquel y presiona el botón de al lado de las puertas para abrirlas y salir. Luego entra a Faz-Pad desde el segundo piso igualmente, esquiva al Staff-Bot e ingresa a la puerta. Encontrás una cocina con otra puerta. Pasa por esa puerta y baja las escaleras. Entra a la puerta que es únicamente roja (no a a roja y azul) y al lado izquierdo tendrás una máquina. Acercate, coloca el pase de entrada y luego el imán que encontraste. Igualmente abre las puertas con el botón y al lado izquierdo de la tienda de regalos está la entrada de la guardería.</p>",
+    "highlighted": true
+  }
+]

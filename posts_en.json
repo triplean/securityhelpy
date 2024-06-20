@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Welcome!",
+        "html": "<h1>Welcome to Security Helpy</h1><p>Welcome to Security Helpy (SH). In this app you will find tutorials and guides for FNAF: Security Breach (We are going to call the game as FNAF SB). Have fun!</p><img src='https://triplean.github.io/projects/SecurityHelpy/resources/logo_new.png'/>",
+        "highlighted": true
+    },
+    {
+        "title": "How to get Daycare Pass",
+        "html": "<h1>How to get Daycare Pass</h1><p>When the doors close Freddy tells us to get a pass. To achieve this you have to take into account two buildings: Faz-Pad and the gift store. Once you take the entry pass you will have to go to the gift store, but as the entrance on the second floor is closed you will have to access it from the second floor. Once you enter dodge the Staff-Bot and look for the stairs to the second floor. Open the gift on a shelf and press the button next to the doors to open them and exit. Then enter Faz-Pad from the second floor as well, dodge the Staff-Bot and enter the door. You will find a kitchen with another door. Go through that door and go down the stairs. Enter the door that is only red (not red and blue) and on the left side you will find a machine. Approach it, place the entry pass and then the magnet you found. Also open the doors with the button and on the left side of the gift store is the entrance to the Daycare.</p>",
+        "highlighted": true
+    }
+]
