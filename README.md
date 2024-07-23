@@ -1,6 +1,7 @@
 # Security Helpy
 Making Security Breach more casual player friendly
 ## Prerequisites
+- Windows 10 or later
 - Python 3.11.9 or later
 - PIP 24.0 or later
 - PyInstaller 6.7.0 or later (Optional)
