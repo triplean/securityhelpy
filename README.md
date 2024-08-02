@@ -3,11 +3,14 @@ Making Security Breach more casual player friendly
 
 ##### Note: Guides are still in progress.
 
+###### You can check the [java version](https://github.com/triplean/sh_java)!
+
 ## Prerequisites
 - Windows 10 or later
 - Python 3.11.9 or later
 - PIP 24.0 or later
 - PyInstaller 6.7.0 or later (Optional)
+
 ## Running
 For running Security Helpy you need to run this on your terminal or command line:
 ```
