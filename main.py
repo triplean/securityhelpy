@@ -1,6 +1,5 @@
 import customtkinter as ctk
-from tkinter import messagebox
-from tkinter import Listbox, Scrollbar
+from tkinter import messagebox, Listbox, Scrollbar
 import requests
 import json
 from tkhtmlview import HTMLLabel
@@ -9,19 +8,16 @@ import os
 version_app = '2.0'
 
 creditos = '''
-
     Gracias por usar Security Helpy!
 
     Desarrollado por: TripleAn
     GitHub: https://github.com/triplean
-
 '''
 
-firt_time_file = 'gracias.txt'
-if not os.path.exists(firt_time_file):
-    messagebox.showinfo(f"Version {version_app}", f"Security Helpy se ha actualizado a la version {version_app}!")
-
-    with open(firt_time_file, 'w') as f:
+first_time_file = 'gracias.txt'
+if not os.path.exists(first_time_file):
+    messagebox.showinfo(f"Versión {version_app}", f"Security Helpy se ha actualizado a la versión {version_app}!")
+    with open(first_time_file, 'w') as f:
         f.write(creditos)
 
 root = ctk.CTk()
@@ -30,12 +26,13 @@ class FNAFHelpApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Security Helpy")
-
+        self.categories = {}
         self.create_widgets()
-        self.load_posts()
+        self.load_categories()
+        self.load_highlighted_posts()
 
     def create_widgets(self):
-        self.buscar_label = ctk.CTkLabel(self.root, text="Busqueda:")
+        self.buscar_label = ctk.CTkLabel(self.root, text="Búsqueda:")
         self.buscar_label.grid(row=0, column=0, padx=3, pady=3)
 
         self.search_entry = ctk.CTkEntry(self.root, width=300)
@@ -46,9 +43,6 @@ class FNAFHelpApp:
 
         self.home_button = ctk.CTkButton(self.root, text="Regresar a inicio", command=self.load_highlighted_posts)
         self.home_button.grid(row=0, column=3, padx=10, pady=10)
-
-        self.version_button = ctk.CTkButton(self.root, text="Speedruns", command=self.open_speedrun_version)
-        self.version_button.grid(row=0, column=4, padx=10, pady=10)
 
         self.posts_frame = ctk.CTkFrame(self.root)
         self.posts_frame.grid(row=1, column=0, columnspan=5, padx=10, pady=10)
@@ -63,11 +57,20 @@ class FNAFHelpApp:
         self.bar_text = Scrollbar(self.posts_frame, orient="vertical", command=self.posts_text.yview)
         self.bar_text.pack(side="right", fill="y")
 
-
-    def load_posts(self):
+    def load_categories(self):
         try:
-            data_url = "https://triplean.github.io/projects/SecurityHelpy/resources/posts_es.json"
-            response = requests.get(data_url)
+
+            categories_url = "https://triplean.github.io/sh/r/categories/categories.json"
+            response = requests.get(categories_url)
+            if response.status_code == 200:
+                self.categories = json.loads(response.content.decode("utf-8"))
+        except Exception as e:
+            messagebox.showerror("Error", f"Error al cargar las categorías: {str(e)}")
+
+    def load_posts(self, category_url):
+        self.posts_listbox.delete(0, ctk.END)
+        try:
+            response = requests.get(category_url)
             if response.status_code == 200:
                 posts = json.loads(response.content.decode("utf-8"))
                 for post in posts:
@@ -77,16 +80,17 @@ class FNAFHelpApp:
 
     def load_highlighted_posts(self):
         self.posts_listbox.delete(0, ctk.END)
-        try:
-            data_url = "https://triplean.github.io/projects/SecurityHelpy/resources/posts_es.json"
-            response = requests.get(data_url)
-            if response.status_code == 200:
-                posts = json.loads(response.content.decode("utf-8"))
-                for post in posts:
-                    if post.get('highlighted', False):
-                        self.posts_listbox.insert(ctk.END, post['title'])
-        except Exception as e:
-            messagebox.showerror("Error", f"Error al cargar los posts destacados: {str(e)}")
+        for category, url in self.categories.items():
+            self.posts_listbox.insert(ctk.END, f"=== {category.title()} ===")
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    posts = json.loads(response.content.decode("utf-8"))
+                    for post in posts:
+                        if post.get('highlighted', False):
+                            self.posts_listbox.insert(ctk.END, post['title'])
+            except Exception as e:
+                messagebox.showerror("Error", f"Error al cargar los posts destacados de {category}: {str(e)}")
 
     def search_help(self):
         search_term = self.search_entry.get().lower()
@@ -95,57 +99,39 @@ class FNAFHelpApp:
             return
 
         self.posts_listbox.delete(0, ctk.END)
-        try:
-            data_url = "https://triplean.github.io/projects/SecurityHelpy/resources/posts_es.json"
-            response = requests.get(data_url)
-            if response.status_code == 200:
-                posts = json.loads(response.content.decode("utf-8"))
-                for post in posts:
-                    if search_term in post.get('title', '').lower() or search_term in post.get('content', '').lower():
-                        self.posts_listbox.insert(ctk.END, post['title'])
-                    else:
-                        self.posts_listbox.insert(ctk.END, "No encontramos resultados")
-        except Exception as e:
-            messagebox.showerror("Error", f"Error al buscar ayuda: {str(e)}")
+        for category, url in self.categories.items():
+            if search_term in category.lower():
+                self.posts_listbox.insert(ctk.END, f"=== {category.title()} ===")
+                try:
+                    response = requests.get(url)
+                    if response.status_code == 200:
+                        posts = json.loads(response.content.decode("utf-8"))
+                        for post in posts:
+                            self.posts_listbox.insert(ctk.END, post['title'])
+                except Exception as e:
+                    messagebox.showerror("Error", f"Error al buscar posts en {category}: {str(e)}")
 
     def show_post(self, event):
         selected_index = self.posts_listbox.curselection()
         if selected_index:
             selected_post = self.posts_listbox.get(selected_index)
-            try:
-                data_url = "https://triplean.github.io/projects/SecurityHelpy/resources/posts.json"
-                response = requests.get(data_url)
-                if response.status_code == 200:
-                    posts = json.loads(response.content.decode("utf-8"))
-                    for post in posts:
-                        if post['title'] == selected_post:
-                            self.posts_text.set_html(post['html'])
-                            break
-            except Exception as e:
-                messagebox.showerror("Error", f"Error al cargar el contenido de la guía: {str(e)}", options="Enviar informe")
-
-    def load_posts_from_speedrun_version(self):
-        try:
-            data_url = "https://triplean.github.io/projects/SecurityHelpy/resources/posts_speedrun_es.json"
-            response = requests.get(data_url)
-            if response.status_code == 200:
-                posts = json.loads(response.content.decode("utf-8"))
-                self.posts_listbox.delete(0, ctk.END)
-                for post in posts:
-                    self.posts_listbox.insert(ctk.END, post['title'])
-        except Exception as e:
-            messagebox.showerror("Error", f"Error al cargar los posts para speedrunners: {str(e)}")
-
-    def close_main_app(self):
-        root.destroy()
-
-    def open_speedrun_version(self):
-        messagebox.showinfo("Proximamente", "El modo speedrunner sigue bajo desarrollo.")
+            if selected_post.startswith("==="):
+                return
+            for category, url in self.categories.items():
+                try:
+                    response = requests.get(url)
+                    if response.status_code == 200:
+                        posts = json.loads(response.content.decode("utf-8"))
+                        for post in posts:
+                            if post['title'] == selected_post:
+                                self.posts_text.set_html(post['html'])
+                                return
+                except Exception as e:
+                    messagebox.showerror("Error", f"Error al cargar el contenido del post: {str(e)}")
 
 def main():
     app = FNAFHelpApp(root)
-    root.iconbitmap("logo.ico")
-    root.after(0, lambda: root.wm_state('zoomed'))
+    #root.after(0, lambda: root.wm_state('zoomed'))
     root.mainloop()
 
 if __name__ == "__main__":
