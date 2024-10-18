@@ -6,7 +6,7 @@ import json
 from tkhtmlview import HTMLLabel
 import os
 
-version_app = '2.0'
+version_app = '1.9'
 
 creditos = '''
 
