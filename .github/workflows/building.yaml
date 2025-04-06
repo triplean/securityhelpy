@@ -7,7 +7,7 @@ on:
     branches: [ release ]
 
 jobs:
-  build macos and ios:
+  build_macos_and_ios:
     runs-on: macos-latest
 
     steps:
