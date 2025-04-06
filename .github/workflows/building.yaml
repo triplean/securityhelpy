@@ -25,6 +25,23 @@ jobs:
       - name: Build macOS app
         run: flutter build macos
 
+      - name: Create macOS DMG
+        run: |
+          mkdir -p release
+          hdiutil create \
+            -volname "SecurityHelpy" \
+            -srcfolder "build/macos/Build/Products/Release/SecurityHelpy.app" \
+            -ov \
+            -format UDZO \
+            release/SecurityHelpy.dmg
+
+      - name: Upload macOS DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: release/SecurityHelpy.dmg
+
+
       - name: Upload macOS .app
         uses: actions/upload-artifact@v4
         with:
