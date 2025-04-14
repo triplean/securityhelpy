@@ -7,41 +7,31 @@ Making Security Breach more casual player friendly
 
 ## Prerequisites
 - Windows 10 or later / Any linux distribution. *Doesn't work on your distro? Open a issue.*
-- Python 3.11.9 or later
-- PIP 24.0 or later
-- PyInstaller 6.7.0 or later (Optional)
+- Flutter SDK installed in your system and available in your PATH
 
-## Running
-For running Security Helpy you need to run this on your terminal or command line:
+## Ensuring everything is good to go
+To ensure you're ready to either compile or run the code from the source, run the following command:
 ```
-pip install -r requirements.txt
+flutter doctor
 ```
-Now just type:
-```
-python main.py
-```
+You should see a list of requisites for compiling to different devices, so ensure you have everything in green for your desired device.
+For example: If I want to compile or run in a android VM I should check that everything related to android is OK.
 
-## Building to binaries
+## Running 🚀
+Running SecurityHelpy is as simple as running:
+```
+flutter run
+```
+Now, select your desired device, and just wait for the app to compile and run, a window should open.
+
+## Building the binaries 🛠️
 ***Note: All of the following commands needs to be run on the source directory.***
-If you want to build Security Helpy you need to use PyInstaller, you can install it via pip:
-```
-pip install pyinstaller
-```
-### Windows
-Open CMD or powershell and execute the following:
-```
-./build
-```
 
-### Linux
-First, check that build.sh has enough permissions by running the following command:
-```
-chmod +x build.sh
-```
-After that you can build Security Helpy by running this on your terminal:
-```
-./build.sh
-```
+For compiling, we need to select the target.
+The most common targets are:
+- APK
+- Your local binary (.exe for windows or a executable file in Linux)
+- APP (for macros)
 
 ## FAQ
 **Can I contribute with the guides?**
