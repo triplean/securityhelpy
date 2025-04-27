@@ -31,7 +31,6 @@ For compiling, we need to select the target.
 The most common targets are:
 - APK
 - Your local binary (.exe for windows or a executable file in Linux)
-- APP (for macros)
 
 ## FAQ
 **Can I contribute with the guides?**
