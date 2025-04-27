@@ -35,8 +35,5 @@ The most common targets are:
 I'm currently working on it. With the release of 2.0 i will create a tool for contributing wit guides.
 
 **Is Mac/Iphone supported?**
-<<<<<<< HEAD
 I don't plan on adding any kind of support to Mac or Iphone. You can compile by yourself the app, but **I will not attend issues that occur on Mac/Iphone.**
-=======
-I don't plan on adding any kind of support to Mac or Iphone. You can compile by yourself the app, but **I will not attend issues that occur on Mac/Iphone.**
->>>>>>> de637b2a3f035937e913a1ff9fcfce635292e026
+
