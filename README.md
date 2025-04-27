@@ -37,5 +37,5 @@ The most common targets are:
 **Can I contribute with the guides?**
 I'm currently working on it. With the release of 2.0 i will create a tool for contributing wit guides.
 
-**Is MacOS supported?**
-No. I don't plan on adding any kind of support to MacOS. If you want, you can contribute in adding a build script for Mac, or solving issues for Mac users, but I'm not going to officially support Mac.
+**Is Mac/Iphone supported?**
+I don't plan on adding any kind of support to Mac or Iphone. You can compile by yourself the app, but **I will not attend issues that occur on Mac/Iphone.**
