@@ -1,9 +1,7 @@
 # Security Helpy
 Making Security Breach more casual player friendly
 
-##### Note: Guides are still in progress.
-
-###### Also, you can check the [java version](https://github.com/triplean/sh_java)!
+##### Note: Guides and GuideCreator are still in progress.
 
 ## Prerequisites
 - Windows 10 or later / Any linux distribution. *Doesn't work on your distro? Open a issue.*
