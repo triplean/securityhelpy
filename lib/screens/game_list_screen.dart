@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/guide_service.dart';
 import '../models/guide_model.dart';
 import 'guide_detail_screen.dart';
+import 'config.dart';
 
 class GameListScreen extends StatefulWidget {
   @override
@@ -40,14 +41,42 @@ class _GameListScreenState extends State<GameListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Configuración',
+          ),
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameListScreen(),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ConfigScreen(),
+              ),
+            );
+          }
+        },
+      ),
       appBar: AppBar(
         title: Row(
           children: [
-            // Cargar la imagen local y redimensionarla
             Image.asset(
-              'assets/logo.png',  // Reemplaza con la ruta correcta de la imagen
-              height: 40,                 // Ajusta el tamaño de la imagen
-              width: 40,                  // Ajusta el tamaño de la imagen
+              'assets/logo.png',
+              height: 40,
+              width: 40,
             ),
             SizedBox(width: 16),
             Expanded(
